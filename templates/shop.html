@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="shop-title" data-key="shopproducts">
+    Shop Products
+</h2>
+
+<div class="product-grid">
+
+{% for p in products %}
+
+<div class="card">
+
+    <img src="{{ p.image }}">
+
+    <h3 class="product-name"
+        data-en="{{ p.name_en }}"
+        data-hi="{{ p.name_hi }}">
+
+        {{ p.name_en }}
+
+    </h3>
+
+    <p>₹{{ p.price }}</p>
+
+    <a href="/add_to_cart?product={{ p.name_en }}&price={{ p.price }}&qty=1">
+
+        <button data-key="addtocart">
+            Add to Cart
+        </button>
+
+    </a>
+
+    <a href="/buy_now?product={{ p.name_en }}&price={{ p.price }}">
+
+        <button class="buy-btn" data-key="buynow">
+            Buy Now
+        </button>
+
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

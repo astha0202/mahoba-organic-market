@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Payment</h2>
+
+<h3>Total Amount: ₹{{ total }}</h3>
+
+<p>Scan QR to Pay:</p>
+
+<img src="/static/images/products/qr.png" width="200">
+
+<br><br>
+
+<a href="/place_order">
+    <button style="background:green; color:white; padding:10px;">
+        Confirm Payment
+    </button>
+</a>
+
+{% endblock %}

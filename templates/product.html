@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 data-key="products">
+    Products
+</h2>
+
+{% if products|length == 0 %}
+<p>No products found</p>
+{% endif %}
+
+<div class="product-grid">
+
+{% for p in products %}
+
+<div class="card">
+
+<img src="{{ p.image }}" width="120">
+
+<h3 class="product-name"
+    data-en="{{ p.name_en }}"
+    data-hi="{{ p.name_hi }}">
+
+{{ p.name_en }}
+
+</h3>
+
+<p>₹{{ p.price }}</p>
+
+<p>{{ p.shop_name }}</p>
+
+{% if p.price < 100 %}
+<p style="color:red;">🔥 Best Price</p>
+{% endif %}
+
+<a href="/add_to_cart?product={{ p.name_en }}&price={{ p.price }}&qty=1">
+
+    <button data-key="addtocart">
+        Add to Cart
+    </button>
+
+</a>
+
+<a href="/buy_now?product={{ p.name_en }}&price={{ p.price }}">
+
+    <button class="buy-btn" data-key="buynow">
+        Buy Now
+    </button>
+
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title data-key="title">
+        Mahoba Organic Market
+    </title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <!-- LOGO -->
+
+    <div class="brand" data-key="title">
+
+        🌿 Mahoba Organic Market
+
+    </div>
+
+    <!-- MOBILE MENU BUTTON -->
+
+    <div class="menu-toggle"
+         onclick="toggleMenu()">
+
+         ☰
+
+    </div>
+
+    <!-- NAV LINKS -->
+
+    <div class="right" id="mobileMenu">
+
+        <button onclick="setLanguage('en')">
+            EN
+        </button>
+
+        <button onclick="setLanguage('hi')">
+            हिंदी
+        </button>
+
+        <button onclick="toggleDarkMode()"
+                id="darkBtn">
+
+            🌙
+
+        </button>
+
+        <a href="/shops"
+           data-key="shops">
+
+            Shops
+
+        </a>
+
+        <a href="/cart"
+           data-key="cart">
+
+            Cart
+
+        </a>
+
+    </div>
+
+</nav>
+
+<!-- MAIN CONTENT -->
+
+<div class="container">
+
+    {% block content %}
+
+    {% endblock %}
+
+</div>
+
+<!-- PREMIUM FOOTER -->
+
+<footer class="footer">
+
+    <div class="footer-grid">
+
+        <!-- ABOUT -->
+
+        <div>
+
+            <h2>
+                🌿 Mahoba Organic Market
+            </h2>
+
+            <p>
+                Fresh organic groceries directly from trusted local farmers and FPOs.
+            </p>
+
+        </div>
+
+        <!-- LINKS -->
+
+        <div>
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/shops">
+                Shops
+            </a>
+
+            <a href="/cart">
+                Cart
+            </a>
+
+        </div>
+
+        <!-- CONTACT -->
+
+        <div>
+
+            <h3>
+                Contact
+            </h3>
+
+            <p>
+                📍 Mahoba, Uttar Pradesh
+            </p>
+
+            <p>
+                📞 +91 9810148847
+            </p>
+
+            <p>
+                ✉ savanudyan@gmail.com
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+
+    <div class="footer-bottom">
+
+        © 2026 Mahoba Organic Market • All Rights Reserved
+
+    </div>
+
+</footer>
+
+<!-- SCRIPTS -->
+
+<script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+<!-- MOBILE MENU SCRIPT -->
+
+<script>
+
+function toggleMenu(){
+
+    document
+    .getElementById("mobileMenu")
+    .classList
+    .toggle("show-menu");
+}
+
+</script>
+
+</body>
+
+</html>

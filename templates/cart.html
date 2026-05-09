@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="cart-heading">🛒 Your Cart</h1>
+
+{% if cart %}
+
+<div class="cart-container">
+
+{% for item in cart %}
+
+<div class="cart-card">
+
+    <div>
+        <h3 class="product-name"
+        data-en="{{ item.product }}"
+        data-hi="{{ item.product_hi }}">
+
+    {{ item.product }}
+
+    </h3>
+
+        <p>
+            ₹{{ item.price }} × {{ item.qty }}
+        </p>
+    </div>
+
+    <a href="/remove_from_cart/{{ loop.index0 }}">
+        <button class="remove-btn">
+            Remove
+        </button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+<div class="cart-total">
+    <h2>Total: ₹{{ total }}</h2>
+
+    <a href="/payment">
+        <button class="payment-btn">
+            Proceed to Payment
+        </button>
+    </a>
+</div>
+
+</div>
+
+{% else %}
+
+<div class="empty-cart">
+
+    <h2>🛒 Cart is Empty</h2>
+
+    <p>Add some organic products 🌿</p>
+
+    <a href="/shops">
+        <button>
+            Explore Shops
+        </button>
+    </a>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

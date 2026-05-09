@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="shop-title">All Shops</h2>
+
+<div class="product-grid">
+
+{% for s in shops %}
+
+<div class="card">
+
+<img src="{{ s.image }}"
+width="100%"
+height="180"
+style="object-fit:contain; border-radius:10px; background:white; padding:5px;">
+<h3>{{ s.name }}</h3>
+
+<div class="stars">
+⭐ ⭐ ⭐ ⭐ ☆
+</div>
+
+<a href="/shop/{{ s.id }}">
+<button>View Shop</button>
+</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
