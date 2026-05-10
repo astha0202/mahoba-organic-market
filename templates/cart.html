@@ -2,7 +2,15 @@
 
 {% block content %}
 
-<h1 class="cart-heading">🛒 Your Cart</h1>
+<h1 class="cart-heading">
+
+🛒 <span data-key="yourcart">
+
+Your Cart
+
+</span>
+
+</h1>
 
 {% if cart %}
 
@@ -13,53 +21,105 @@
 <div class="cart-card">
 
     <div>
+
+        <!-- PRODUCT NAME -->
+
         <h3 class="product-name"
-        data-en="{{ item.product }}"
-        data-hi="{{ item.product_hi }}">
+            data-en="{{ item.product }}"
+            data-hi="{{ item.product_hi }}">
 
-    {{ item.product }}
+            {{ item.product }}
 
-    </h3>
+        </h3>
+
+        <!-- PRICE -->
 
         <p>
+
             ₹{{ item.price }} × {{ item.qty }}
+
         </p>
+
     </div>
 
+    <!-- REMOVE -->
+
     <a href="/remove_from_cart/{{ loop.index0 }}">
-        <button class="remove-btn">
+
+        <button class="remove-btn"
+                data-key="remove">
+
             Remove
+
         </button>
+
     </a>
 
 </div>
 
 {% endfor %}
 
+<!-- TOTAL -->
+
 <div class="cart-total">
-    <h2>Total: ₹{{ total }}</h2>
+
+    <h2>
+
+        <span data-key="total">
+
+            Total
+
+        </span>
+
+        :
+
+        ₹{{ total }}
+
+    </h2>
 
     <a href="/payment">
-        <button class="payment-btn">
+
+        <button class="payment-btn"
+                data-key="proceedpayment">
+
             Proceed to Payment
+
         </button>
+
     </a>
+
 </div>
 
 </div>
 
 {% else %}
 
+<!-- EMPTY CART -->
+
 <div class="empty-cart">
 
-    <h2>🛒 Cart is Empty</h2>
+    <div class="cart-icon">
+        🛒
+    </div>
 
-    <p>Add some organic products 🌿</p>
+    <h3 data-key="emptycart">
 
-    <a href="/shops">
-        <button>
-            Explore Shops
-        </button>
+        Your cart is empty
+
+    </h3>
+
+    <p data-key="emptycartdesc">
+
+        Add fresh organic products from local shops.
+
+    </p>
+
+    <a href="/shops"
+       class="btn"
+       data-key="exploreshops">
+
+        Explore Shops
+
     </a>
 
 </div>

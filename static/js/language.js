@@ -38,11 +38,19 @@ function updateLanguage(){
 
             popularshops:"Popular Shops",
 
-            seller:"Trusted local seller"
+            seller:"Trusted local seller",
+            emptycart:"Your cart is empty",
+            emptycartdesc:"Add fresh organic products from local shops.",
+            exploreshops:"Explore Shops",
+            allshops:"All Shops"
         },
 
         hi:{
             title:"🌿 महोबा ऑर्गेनिक मार्केट",
+            emptycart:"आपकी कार्ट खाली है",
+            emptycartdesc:"लोकल दुकानों से ताज़ा ऑर्गेनिक उत्पाद जोड़ें।",
+            exploreshops:"दुकानें देखें",
+            allshops:"सभी दुकानें",
             cart:"कार्ट",
             shops:"दुकानें",
             addtocart:"कार्ट में जोड़ें",
@@ -92,5 +100,7 @@ function updateLanguage(){
         }
     });
 }
-
-window.onload = updateLanguage;
+document.addEventListener(
+    "DOMContentLoaded",
+    updateLanguage
+);

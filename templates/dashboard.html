@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="shop-title">
+    Vendor Dashboard
+</h2>
+
+<!-- ADD PRODUCT FORM -->
+
+<div class="dashboard-form">
+
+<form method="POST"
+      action="/add-product"
+      enctype="multipart/form-data">
+
+    <!-- ENGLISH NAME -->
+
+    <input type="text"
+           name="name_en"
+           id="englishInput"
+           placeholder="English Name"
+           required>
+
+    <!-- HINDI NAME -->
+
+    <input type="text"
+           name="name_hi"
+           id="hindiInput"
+           placeholder="Hindi Name"
+           required>
+
+    <!-- PRICE -->
+
+    <input type="text"
+           name="price"
+           id="priceInput"
+           placeholder="Price"
+           required>
+
+    <!-- PREMIUM IMAGE UPLOAD -->
+
+    <label class="upload-box">
+
+        <input type="file"
+               name="image"
+               id="imageInput"
+               accept="image/*"
+               required>
+
+        <div class="upload-content">
+
+            <div class="upload-icon">
+                ⬆
+            </div>
+
+            <h3>
+                Drag & Drop Image
+            </h3>
+
+            <p>
+                or click to browse files
+            </p>
+
+        </div>
+
+    </label>
+
+    <!-- IMAGE PREVIEW -->
+
+    <img id="previewImage">
+
+    <br><br>
+
+    <!-- BUTTON -->
+
+    <button>
+        Add Product
+    </button>
+
+</form>
+
+</div>
+
+<br><br>
+
+<!-- PRODUCTS -->
+
+<div class="product-grid">
+
+{% for p in products %}
+
+<div class="card">
+
+    <!-- IMAGE -->
+
+    <img src="{{ p[5] }}"
+         width="100%">
+
+    <!-- ENGLISH NAME -->
+
+    <h3 class="product-name">
+
+        {{ p[2] }}
+
+    </h3>
+
+    <!-- HINDI NAME -->
+
+    <p>
+
+        {{ p[3] }}
+
+    </p>
+
+    <!-- PRICE -->
+
+    <p>
+
+        ₹{{ p[4] }}
+
+    </p>
+
+    <br>
+
+    <!-- EDIT BUTTON -->
+
+    <a href="/edit-product/{{ p[0] }}">
+
+        <button>
+
+            Edit
+
+        </button>
+
+    </a>
+
+    <br><br>
+
+    <!-- DELETE BUTTON -->
+
+    <a href="/delete-product/{{ p[0] }}">
+
+        <button style="background:red;">
+
+            Delete
+
+        </button>
+
+    </a>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- VALIDATION SCRIPT -->
+
+<script>
+
+/* =========================
+   PRICE VALIDATION
+========================= */
+
+document
+.getElementById("priceInput")
+.addEventListener("input", function(){
+
+    let original = this.value;
+
+    let cleaned =
+    original.replace(/[^0-9]/g,'');
+
+    if(original !== cleaned){
+
+        alert("Only digits are allowed in price");
+    }
+
+    this.value = cleaned;
+});
+
+
+/* =========================
+   ENGLISH VALIDATION
+========================= */
+
+document
+.getElementById("englishInput")
+.addEventListener("input", function(){
+
+    let regex = /^[A-Za-z0-9\s.,()-]*$/;
+
+    if(!regex.test(this.value)){
+
+        alert("यहाँ केवल English लिखें");
+
+        this.value =
+        this.value.replace(/[^A-Za-z0-9\s.,()-]/g,'');
+    }
+});
+
+
+/* =========================
+   HINDI VALIDATION
+========================= */
+
+document
+.getElementById("hindiInput")
+.addEventListener("input", function(){
+
+    let regex = /^[\u0900-\u097F\s0-9.,()-]*$/;
+
+    if(!regex.test(this.value)){
+
+        alert("यहाँ केवल हिंदी लिखें");
+
+        this.value =
+        this.value.replace(/[^\u0900-\u097F\s0-9.,()-]/g,'');
+    }
+});
+
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+document
+.getElementById("imageInput")
+.addEventListener("change", function(e){
+
+    let file = e.target.files[0];
+
+    if(file){
+
+        let reader = new FileReader();
+
+        reader.onload = function(event){
+
+            let preview =
+            document.getElementById("previewImage");
+
+            preview.src =
+            event.target.result;
+
+            preview.style.display =
+            "block";
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
+
+</script>
+
+{% endblock %}

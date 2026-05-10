@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="shop-title">
+
+    Edit Product
+
+</h2>
+
+<div class="dashboard-form">
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+    <!-- ENGLISH NAME -->
+
+    <input type="text"
+           name="name_en"
+           value="{{ product[2] }}"
+           placeholder="English Name"
+           required
+
+           oninput="
+           this.value =
+           this.value.replace(/[^A-Za-z0-9 ]/g,'')
+           ">
+
+    <!-- HINDI NAME -->
+
+    <input type="text"
+           name="name_hi"
+           value="{{ product[3] }}"
+           placeholder="Hindi Name"
+           required
+
+           oninput="
+           this.value =
+           this.value.replace(/[A-Za-z0-9]/g,'')
+           ">
+
+    <!-- PRICE -->
+
+    <input type="text"
+           name="price"
+           value="{{ product[4] }}"
+           placeholder="Price"
+           required
+
+           oninput="
+           this.value =
+           this.value.replace(/[^0-9]/g,'')
+           ">
+
+    <!-- CURRENT IMAGE -->
+
+    <div class="current-image">
+
+        <img src="{{ product[5] }}"
+             width="160">
+
+    </div>
+
+    <!-- DRAG DROP IMAGE -->
+
+    <div class="upload-box"
+         id="uploadBox">
+
+        <p>
+
+            📁 Drag & Drop Image Here
+
+        </p>
+
+        <span>
+
+            or click to upload
+
+        </span>
+
+        <input type="file"
+               name="image"
+               id="imageInput"
+               accept="image/*"
+               required>
+
+    </div>
+
+    <!-- PREVIEW -->
+
+    <img id="previewImage"
+         class="preview-image">
+
+    <!-- BUTTON -->
+
+    <button>
+
+        Update Product
+
+    </button>
+
+</form>
+
+</div>
+
+<!-- SCRIPT -->
+
+<script>
+
+/* =========================
+   IMAGE PREVIEW
+========================= */
+
+const imageInput =
+document.getElementById("imageInput");
+
+const previewImage =
+document.getElementById("previewImage");
+
+const uploadBox =
+document.getElementById("uploadBox");
+
+/* CLICK */
+
+uploadBox.addEventListener(
+    "click",
+    () => imageInput.click()
+);
+
+/* PREVIEW */
+
+imageInput.addEventListener(
+    "change",
+    function(){
+
+        const file =
+        this.files[0];
+
+        if(file){
+
+            const reader =
+            new FileReader();
+
+            reader.onload =
+            function(e){
+
+                previewImage.src =
+                e.target.result;
+
+                previewImage.style.display =
+                "block";
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+);
+
+/* DRAG OVER */
+
+uploadBox.addEventListener(
+    "dragover",
+    function(e){
+
+        e.preventDefault();
+
+        uploadBox.classList.add("dragging");
+    }
+);
+
+/* DRAG LEAVE */
+
+uploadBox.addEventListener(
+    "dragleave",
+    function(){
+
+        uploadBox.classList.remove("dragging");
+    }
+);
+
+/* DROP */
+
+uploadBox.addEventListener(
+    "drop",
+    function(e){
+
+        e.preventDefault();
+
+        uploadBox.classList.remove("dragging");
+
+        imageInput.files =
+        e.dataTransfer.files;
+
+        const file =
+        e.dataTransfer.files[0];
+
+        if(file){
+
+            const reader =
+            new FileReader();
+
+            reader.onload =
+            function(ev){
+
+                previewImage.src =
+                ev.target.result;
+
+                previewImage.style.display =
+                "block";
+            };
+
+            reader.readAsDataURL(file);
+        }
+    }
+);
+
+</script>
+
+{% endblock %}

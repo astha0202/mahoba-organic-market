@@ -44,6 +44,8 @@
 
     <div class="right" id="mobileMenu">
 
+        <!-- LANGUAGE -->
+
         <button onclick="setLanguage('en')">
             EN
         </button>
@@ -52,12 +54,16 @@
             हिंदी
         </button>
 
+        <!-- DARK MODE -->
+
         <button onclick="toggleDarkMode()"
                 id="darkBtn">
 
             🌙
 
         </button>
+
+        <!-- NORMAL LINKS -->
 
         <a href="/shops"
            data-key="shops">
@@ -73,6 +79,44 @@
 
         </a>
 
+        <!-- LOGIN CHECK -->
+
+        {% if session.get("user_id") %}
+
+        <a href="/dashboard">
+
+            Dashboard
+
+        </a>
+
+        <a href="/change-password">
+
+            Change Password
+
+        </a>
+
+        <a href="/logout">
+
+            Logout
+
+        </a>
+
+        {% else %}
+
+        <a href="/login">
+
+            Vendor Login
+
+        </a>
+
+        <a href="/signup">
+
+            Signup
+
+        </a>
+
+        {% endif %}
+
     </div>
 
 </nav>
@@ -87,7 +131,7 @@
 
 </div>
 
-<!-- PREMIUM FOOTER -->
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -107,7 +151,7 @@
 
         </div>
 
-        <!-- LINKS -->
+        <!-- QUICK LINKS -->
 
         <div>
 
@@ -153,7 +197,7 @@
 
     </div>
 
-    <!-- BOTTOM -->
+    <!-- FOOTER BOTTOM -->
 
     <div class="footer-bottom">
 
@@ -169,7 +213,7 @@
 
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
-<!-- MOBILE MENU SCRIPT -->
+<!-- MOBILE MENU -->
 
 <script>
 
